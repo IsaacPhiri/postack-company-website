@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+**File Structure**
+/company-website
+│
+├── /components                  # Your React components
+│   ├── /Hosting                 # Hosting-related components
+│   │   └── HostingServiceRequestForm.tsx
+│   ├── /Navbar                  # Navbar component
+│   │   └── Navbar.tsx
+│   └── /Footer                  # Footer component
+│       └── Footer.tsx
+│
+├── /pages                       # Your pages (Next.js pages)
+│   ├── /api                     # API routes for your forms
+│   │   └── contact.ts
+│   ├── index.tsx                # The main page (Home page)
+│   ├── about.tsx                # About Us page
+│   ├── services.tsx             # Services page
+│   ├── hosting.tsx              # Hosting page
+│   └── contact.tsx              # Contact page
+│
+├── /public                      # Public assets (images, icons)
+│   ├── /images
+│   │   └── logo.png
+│   └── /favicon.ico
+│
+├── /styles                       # Global styles
+│   ├── globals.css
+│   ├── tailwind.config.ts
+│   └── postcss.config.mjs
+│
+├── /utils                        # Utility functions
+│   └── emailUtils.ts            # For email-related functions
+│
+├── .gitignore                   # Git ignore file
+├── package.json                 # Project dependencies and scripts
+├── next.config.js               # Next.js configuration
+└── README.md                    # Project documentation
 
-## Getting Started
 
-First, run the development server:
+**Pull Requests**
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- All changes must be made via pull requests.
+- Ensure your pull request has a clear description of the changes made.
+- At least one team member must review and approve the pull request before it can be merged.
+- Only push complete, optimized and working features to the main branch.
