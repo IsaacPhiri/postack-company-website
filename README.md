@@ -43,3 +43,5 @@
 - Ensure your pull request has a clear description of the changes made.
 - At least one team member must review and approve the pull request before it can be merged.
 - Only push complete, optimized and working features to the main branch.
+
+### Git
