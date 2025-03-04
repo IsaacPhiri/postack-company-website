@@ -1,4 +1,6 @@
 **File Structure**
+
+```
 /company-website
 │
 ├── /components                  # Your React components
@@ -35,6 +37,8 @@
 ├── package.json                 # Project dependencies and scripts
 ├── next.config.js               # Next.js configuration
 └── README.md                    # Project documentation
+
+```
 
 
 **Pull Requests**
