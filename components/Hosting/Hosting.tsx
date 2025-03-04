@@ -7,13 +7,11 @@ const Hosting: NextPage = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedPackage, setSelectedPackage] = useState("");
 
-  // Function to open the modal and set the selected package
   const openModal = (packageName: string) => {
     setSelectedPackage(packageName);
     setIsModalOpen(true);
   };
 
-  // Function to close the modal
   const closeModal = () => {
     setIsModalOpen(false);
   };
@@ -58,15 +56,13 @@ const Hosting: NextPage = () => {
     },
   ];
 
-  // Disable background scroll when modal is open
   useEffect(() => {
     if (isModalOpen) {
-      document.body.style.overflow = "hidden"; // Prevent scrolling
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "auto"; // Restore scrolling
+      document.body.style.overflow = "auto";
     }
 
-    // Clean up to restore scrolling when the component is unmounted or modal is closed
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -108,7 +104,7 @@ const Hosting: NextPage = () => {
             </ul>
             <button
               className="w-full bg-blue-900 text-white py-4 px-6 rounded-lg font-bold hover:bg-blue-800 transition-colors"
-              onClick={() => openModal(plan.name)} // This is the open modal handler
+              onClick={() => openModal(plan.name)}
             >
               Request Service
             </button>
@@ -118,10 +114,10 @@ const Hosting: NextPage = () => {
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full pb-12">
+          <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full pb-16"> 
             <HostingServiceRequestForm
               selectedPackage={selectedPackage}
-              onClose={closeModal} // Ensure this matches the prop name in the child component
+              onClose={closeModal}
             />
           </div>
         </div>
