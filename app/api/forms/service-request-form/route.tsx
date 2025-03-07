@@ -4,6 +4,7 @@ import type React from "react";
 
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
+import Swal from 'sweetalert2';
 
 interface Service {
   id: string
@@ -22,6 +23,7 @@ interface ServiceRequestFormProps {
 
 export default function ServiceRequestForm({ isOpen, onClose, selectedService, services }: ServiceRequestFormProps) {
   const [formData, setFormData] = useState({
+    access_key: process.env.NEXT_PUBLIC_ACCESS_KEY || "",
     fullName: "",
     email: "",
     phone: "",
@@ -48,21 +50,22 @@ export default function ServiceRequestForm({ isOpen, onClose, selectedService, s
     }))
   }
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-  
+  // Handle form submission to database
+  const handleSubmit = async () => {
     try {
-      const response = await fetch("https://formsubmit.co/b56fab0e91f02c82c2a8de0155e76037", {
+      const response = await fetch("/api/forms/services", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify(formData),
-      })
-  
+      });
+
       if (response.ok) {
-        alert("Your service request has been submitted successfully! We'll contact you soon.")
+        console.log("Form submitted successfully!");
         setFormData({
+          access_key: process.env.NEXT_PUBLIC_ACCESS_KEY || "",
           fullName: "",
           email: "",
           phone: "",
@@ -71,18 +74,65 @@ export default function ServiceRequestForm({ isOpen, onClose, selectedService, s
           requirements: "",
           budgetRange: "",
           timeline: "",
-        })
-        onClose()
+        });
       } else {
-        alert("Something went wrong. Please try again.")
+        const errorData = await response.text();
+        console.log("Error submitting form:", errorData ? JSON.parse(errorData) : "No response body");
       }
     } catch (error) {
-      console.error("Error submitting form:", error)
-      alert("An error occurred while submitting your request.")
+      console.error("Network error:", error);
     }
-  }
+  };
 
-  if (!isOpen) return null
+  const handleEmailForwarding = async () => {
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        Swal.fire({
+          title: "Success!",
+          text: "Request Submitted Successfully!",
+          icon: "success"
+        });
+
+        setFormData({
+          access_key: process.env.NEXT_PUBLIC_ACCESS_KEY || "",
+          fullName: "",
+          email: "",
+          phone: "",
+          company: "",
+          serviceType: selectedService,
+          requirements: "",
+          budgetRange: "",
+          timeline: "",
+        });
+        onClose();
+      } else {
+        const errorData = await response.text();
+        console.log("Error forwarding email:", errorData ? JSON.parse(errorData) : "No response body");
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("An error occurred while submitting your request.");
+    }
+  };
+
+  if (!isOpen) return null;
+
+  // Handle form submission
+  const handleFormSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await handleSubmit();
+    await handleEmailForwarding();
+  };
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
@@ -94,7 +144,7 @@ export default function ServiceRequestForm({ isOpen, onClose, selectedService, s
           </button>
         </div>
 
-        <form onSubmit={handleSubmit} className="p-6">
+        <form onSubmit={handleFormSubmit} className="p-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
             <div>
               <label htmlFor="fullName" className="block text-sm font-medium text-gray-700 mb-1">
@@ -265,4 +315,3 @@ export default function ServiceRequestForm({ isOpen, onClose, selectedService, s
     </div>
   )
 }
-
