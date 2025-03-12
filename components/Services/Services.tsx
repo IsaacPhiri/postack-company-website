@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { Check, Code, Globe, Smartphone, Database, ShoppingCart, BarChart, Server } from "lucide-react"
+import { Check, Code, Globe, Smartphone, Database, ShoppingCart, Server } from "lucide-react"
 import ServiceRequestForm from "@/app/api/forms/service-request-form/route";
 
 export default function Services() {
@@ -72,19 +72,6 @@ export default function Services() {
         "Inventory management",
         "Order processing systems",
         "Customer relationship management",
-      ],
-    },
-    {
-      id: "data-analytics",
-      title: "Data Analytics & Reporting",
-      description: "Transform your data into actionable insights with custom analytics solutions.",
-      icon: BarChart,
-      features: [
-        "Custom dashboard development",
-        "Data visualization",
-        "Business intelligence solutions",
-        "Predictive analytics",
-        "Reporting automation",
       ],
     },
     {
