@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.animate-bg-move {
+ animation: bgMove 15s infinite alternate linear;
+}
